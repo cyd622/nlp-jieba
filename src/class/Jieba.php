@@ -362,8 +362,8 @@ class Jieba
                 array_push($word_c, $c);
                 $next_word_key_value = self::$trie->get($next_word_key);
                 if ($next_word_key_value == array("end"=>"")
-                 || isset($next_word_key_value["end"])
-                 || isset($next_word_key_value[0]["end"])
+                    || isset($next_word_key_value["end"])
+                    || isset($next_word_key_value[0]["end"])
                 ) {
                     self::$dag_cache[$next_word_key]['end'] = true;
                     if (!isset($DAG[$i])) {
@@ -547,23 +547,23 @@ class Jieba
         $seg_list = array();
 
         $re_han_pattern = '([\x{4E00}-\x{9FA5}]+)';
-        $re_han_with_ascii_pattern = '([\x{4E00}-\x{9FA5}a-zA-Z0-9+#&=\._]+)';
+        $re_han_with_ascii_pattern = '([\x{4E00}-\x{9FA5}#&=_]+)';
         $re_kanjikana_pattern = '([\x{3040}-\x{309F}\x{4E00}-\x{9FA5}]+)';
         $re_katakana_pattern = '([\x{30A0}-\x{30FF}]+)';
         $re_hangul_pattern = '([\x{AC00}-\x{D7AF}]+)';
-        $re_ascii_pattern = '([a-zA-Z0-9+#&=\._\r\n]+)';
+        $re_ascii_pattern = '([#&=_\r\n]+)';
         $re_skip_pattern = '(\s+)';
         if ($cut_all) {
-            $re_skip_pattern = '([a-zA-Z0-9+#&=\._\r\n]+)';
+            $re_skip_pattern = '([#&=\._\r\n]+)';
         }
         $re_punctuation_pattern = '([\x{ff5e}\x{ff01}\x{ff08}\x{ff09}\x{300e}'.
-                                    '\x{300c}\x{300d}\x{300f}\x{3001}\x{ff1a}\x{ff1b}'.
-                                    '\x{ff0c}\x{ff1f}\x{3002}]+)';
+            '\x{300c}\x{300d}\x{300f}\x{3001}\x{ff1a}\x{ff1b}'.
+            '\x{ff0c}\x{ff1f}\x{3002}]+)';
 
         if (self::$cjk_all) {
             $filter_pattern = $re_kanjikana_pattern.
-                            '|'.$re_katakana_pattern.
-                            '|'.$re_hangul_pattern;
+                '|'.$re_katakana_pattern.
+                '|'.$re_hangul_pattern;
         } else {
             $filter_pattern = $re_han_with_ascii_pattern;
         }
